@@ -149,4 +149,72 @@ public class AdminMemberController {
 
 	}
 
+	/*
+	 * 회원정보 수정
+	 */
+//	@RequestMapping(value= "/modifyAccountForm", method = RequestMethod.GET)
+	@GetMapping("/modifyAccountForm")
+	public String modifyAccountForm(HttpSession session) {
+		System.out.println("[AdminMemberController] modifyAccountForm()");
+
+		String nextPage = "admin/member/modify_account_form";
+
+		AdminMemberVo loginedAdminMemberVo = (AdminMemberVo) session.getAttribute("loginedAdminMemberVo");
+
+		if (loginedAdminMemberVo == null)
+			nextPage = "redirect:/admin/member/loginForm";
+
+		return nextPage;
+	}
+
+	/*
+	 * 회원정보 수정 확인
+	 */
+//	@RequestMapping(value= "/modifyAccountConfirm", method = RequestMethod.POST)
+	@PostMapping("/modifyAccountConfirm")
+	public String modifyAccountConfirm(AdminMemberVo adminMemberVo, HttpSession session) {
+		System.out.println("[AdminMemberController] modifyAccountConfirm()");
+		String nextPage = "admin/member/modify_account_ok";
+		int result = adminMemberService.modifyAccountConfirm(adminMemberVo);
+
+		if (result > 0) {
+			AdminMemberVo loginedAdminMemberVo = adminMemberService.getLoginedAdminMemberVo(adminMemberVo.getA_m_no());
+
+			session.setAttribute("loginedAdminMemberVo", loginedAdminMemberVo);
+			session.setMaxInactiveInterval(60 * 30);
+		} else {
+			nextPage = "admin/member/modify_account_ng";
+		}
+
+		return nextPage;
+
+	}
+
+	/*
+	 * 비밀번호 찾기
+	 */
+	@GetMapping("/findPasswordForm")
+	public String findPasswordForm() {
+		System.out.println("[AdminMemberController] findPasswordForm()");
+		String nextPage = "admin/member/find_password_form";
+		return nextPage;
+	}
+
+	
+	/*
+	 * 비밀번호 찾기 확인
+	 */
+	@PostMapping("/findPasswordConfirm")
+	public String findPasswordConfirm(AdminMemberVo adminMemberVo) {
+		System.out.println("[AdminMemberController] findPasswordConfirm()");
+		
+		String nextPage = "admin/member/find_password_ok";
+		
+		int result = adminMemberService.findPasswordConfirm(adminMemberVo);
+		
+		if(result <=0)
+			nextPage = "admin/member/find_password_ng";
+		
+		return nextPage;
+	}
 }

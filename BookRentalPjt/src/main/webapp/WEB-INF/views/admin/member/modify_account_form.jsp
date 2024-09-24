@@ -41,7 +41,7 @@
 					<input type="password" name="a_m_pw" value="******" readonly disabled> <br>
 					<input type="text" name="a_m_name" value="${loginedAdminMemberVo.a_m_name}" placeholder="INPUT USER NAME."> <br>
 					<select name="a_m_gender">
-						<option value="">SELECET USER GENDER.</option>
+						<option value="">SELECT USER GENDER.</option>
 						<c:set var="gender" value="${loginedAdminMemberVo.a_m_gender}" />
 						<option value="M" <c:if test = "${gender eq 'M'}"> selected </c:if>>Man</option>
 						<option value="W" <c:if test = "${gender eq 'W'}"> selected </c:if>>Woman</option>
