@@ -10,7 +10,7 @@
 		<property name="host" value="smtp.gmail.com" />
 		<property name="port" value="587" />
 		<property name="username" value="yunsky2@gmail.com" />  <!--  개인 수신 가능한 메일 주소 작성 -->
-		<property name="password" value="--------------" />    <!--  생성된 앱 비밀번호 입력 -->
+		<property name="password" value="-----------------" />    <!--  생성된 앱 비밀번호 입력 -->
 		<property name="javaMailProperties">
 			<props>
 				<prop key="mail.smtp.auth">true</prop>
