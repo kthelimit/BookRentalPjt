@@ -1,7 +1,6 @@
 package com.office.library.user.member;
 
 import java.security.SecureRandom;
-import java.util.List;
 
 import javax.mail.internet.MimeMessage;
 
