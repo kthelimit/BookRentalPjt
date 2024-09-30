@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.office.library.book.BookVo;
+import com.office.library.book.HopeBookVo;
 import com.office.library.book.RentalBookVo;
 
 @Service
@@ -82,5 +83,33 @@ public class BookService {
 			result = bookDao.updateBook(b_no);
 
 		return result;
+	}
+
+	public List<HopeBookVo> getHopeBooks() {
+		System.out.println("[BookService] returnBookConfirm()");
+
+		return bookDao.selectHopeBooks();
+	}
+
+	public int registerBookConfirm(BookVo bookVo, int hb_no) {
+		System.out.println("[BookService] registerBookConfirm()");
+		boolean isISBN = bookDao.isISBN(bookVo.getB_isbn());
+		if (!isISBN) {
+			int result = bookDao.insertBook(bookVo);
+			if (result > 0) {
+				bookDao.updateHopeBookResult(hb_no);
+				return BOOK_REGISTER_SUCCESS;
+			} else {
+				return BOOK_REGISTER_FAIL;
+			}
+		} else {
+			return BOOK_ISBN_ALREADY_EXIST;
+		}
+	}
+
+	public List<BookVo> getAllBooks() {
+		System.out.println("[BookService] getAllBooks()");
+
+		return bookDao.selectAllBooks();
 	}
 }

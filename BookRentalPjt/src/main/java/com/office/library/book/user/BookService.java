@@ -51,4 +51,11 @@ public class BookService {
 		
 		return bookDao.insertHopeBook(hopeBookVo);		
 	}
+	
+	
+	public List<HopeBookVo> listupRequestHopeBook(int u_m_no){
+		System.out.println("[BookService] listupRequestHopeBook()");
+		
+		return bookDao.selectRequestHopeBooks(u_m_no);
+	}
 }

@@ -141,4 +141,19 @@ public class BookController {
 
 	}
 
+	/*
+	 * 희망 도서 요청 목록
+	 */
+	@GetMapping("/listupRequestHopeBook")
+	public String listupRequestHopeBook(HttpSession session, Model model) {
+		System.out.println("[BookController] listupRequestHopeBook()");
+
+		String nextPage = "user/book/list_hope_book";
+		UserMemberVo loginedUserMemberVo = (UserMemberVo) session.getAttribute("loginedUserMemberVo");
+		List<HopeBookVo> hopeBookVos = bookService.listupRequestHopeBook(loginedUserMemberVo.getU_m_no());
+		model.addAttribute("hopeBookVos", hopeBookVos);
+
+		return nextPage;
+	}
+
 }
